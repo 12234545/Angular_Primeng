@@ -30,4 +30,10 @@ export const routes: Routes = [
       return import('./components/register/register.component').then(m => m.RegisterComponent);
     }
   },
+  {
+    path: 'todoList',
+    loadComponent: () =>{
+      return import('./components/todo-list/todo-list.component').then(m => m.TodoListComponent);
+    }
+  },
 ];

@@ -41,6 +41,34 @@
       "fullName": "gggfff",
       "email": "khawlabakkali277@gmail.com",
       "password": "123"
+    },
+    {
+      "id": "e9ed",
+      "fullName": "khaoula El bakkali",
+      "email": "khaoulaBK@gmail.com",
+      "password": "12345678"
+    }
+  ],
+  "todos": [
+    {
+      "id ": 1,
+      "task": "Task 1",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "task": "Task 2",
+      "completed": false
+    },
+    {
+      "id": "a8cf",
+      "task": "L",
+      "completed": false
+    },
+    {
+      "id": "8366",
+      "task": "L",
+      "completed": false
     }
   ]
 }

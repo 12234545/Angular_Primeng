@@ -1,7 +1,21 @@
 <div class="container">
-   <img src="assets/logo.png" alt="Logo" class="logo" />
-  <h1>Welcome to <strong>FORMITO</strong> </h1>
+  <img src="assets/logo.png" alt="Logo" class="logo" />
+  <h1>Welcome to <strong>FORMITO</strong></h1>
   <p>Here you can find various resources and information.</p>
-  <p-button label="Log Out" [style]="{ background: '#ff9800' , border: 'none' }" (onClick)="logOut()"></p-button>
+
+  <div *ngIf="userInfo" class="user-info">
+    <h3>Your Information </h3>
+    <div class="info-card">
+      <p><strong>Full Name:</strong> {{ userInfo.fullName }}</p>
+      <p><strong>Email:</strong> {{ userInfo.email }}</p>
+    </div>
+  </div>
+  <div class="button-container">
+
+  <p-button id="but" [style]="{ background: '#F738D4', border: 'none' }" ><a routerLink="/todoList" style="text-decoration: none; color: white;"><span class="pi pi-pen-to-square"></span>  Todo List</a></p-button>
+  <p-button id="but" [style]="{ background: '#1ADA63', border: 'none' }" ><a routerLink="" style="text-decoration: none; color: white;"><span class="pi pi-shop"></span>  Shop</a></p-button>
+  <p-button id="but" [style]="{ background: '#17B6EE', border: 'none' }" ><a routerLink="" style="text-decoration: none; color: white;"><span class="pi pi-microchip-ai"></span>  ChatBot</a></p-button>
+  <p-button id="but" label="Log Out" [style]="{ background: '#ff9800', border: 'none' }" (onClick)="logOut()"><i class="pi pi-sign-out"></i></p-button>
+  </div>
 </div>
 

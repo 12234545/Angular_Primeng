@@ -7,16 +7,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private baseUrl = 'http://localhost:3001'
+  private baseUrl = 'http://localhost:3001';
 
   constructor(private http: HttpClient) { }
 
-  registerUser(userDetails : User ){
-      return this.http.post(`${this.baseUrl}/users`, userDetails)
+  registerUser(userDetails: User) {
+    return this.http.post(`${this.baseUrl}/users`, userDetails);
   }
 
-  getUserByEmail(email: string) : Observable<User[]> {
-       return this.http.get<User[]>(`${this.baseUrl}/users?email=${email}`)
+  getUserByEmail(email: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/users?email=${email}`);
+  }
+
+  getCurrentUser(): Observable<User[]> {
+    const email = sessionStorage.getItem('email');
+    if (email) {
+      return this.getUserByEmail(email);
+    }
+    return new Observable(observer => observer.error('No user logged in'));
   }
 }

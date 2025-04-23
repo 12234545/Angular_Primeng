@@ -1,0 +1,51 @@
+.container{
+  height: 80vh;
+  width: 80vw;
+  background-color: rgba(255, 255, 255, 0.863);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px ;
+}
+
+#but{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#butt{
+  margin: 10px;
+}
+
+.cont2{
+  display: flex;
+}
+
+:host ::ng-deep .p-inputtext:focus {
+  border-color: #17B6EE;
+}
+
+/* Styles pour le tableau avec défilement */
+:host ::ng-deep .p-datatable .p-datatable-wrapper {
+  max-height: 40px;
+  overflow-y: auto;
+}
+
+/* Assurer que le tableau prend toute la largeur disponible */
+:host ::ng-deep .p-datatable {
+  width: 100%;
+}
+
+/* Styles pour les en-têtes de colonne fixes */
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}

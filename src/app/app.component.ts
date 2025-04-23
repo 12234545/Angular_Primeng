@@ -20,5 +20,6 @@ import { MessageService } from 'primeng/api';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'app-angular-primeng';
+  title = 'Formito';
+
 }

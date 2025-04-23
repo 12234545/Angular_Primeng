@@ -5,10 +5,10 @@
   justify-content: center;
   height: 80vh;
   width: 80vw;
-  background-color: antiquewhite;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.863);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -27,4 +27,32 @@ p {
   width: 100px;
   height: 100px;
   margin-bottom: 2rem;
+}
+
+
+.info-card p {
+  margin: 20px ;
+  font-size: 16px;
+}
+.info-card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+
+}
+#but{
+  margin-left: 20px;
+  margin-right: 20px;
 }
