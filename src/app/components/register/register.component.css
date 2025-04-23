@@ -1,0 +1,129 @@
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+:host ::ng-deep .p-card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+:host ::ng-deep .p-card .p-card-header {
+  font-size: 1.7rem;
+  font-weight:bold;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+:host ::ng-deep .p-card .p-card-body {
+  padding: 1.5rem;
+}
+
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-inputtext:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+}
+
+:host ::ng-deep .p-inputtext:hover {
+  border-color: #ffb74d;
+}
+
+
+.error-message {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+}
+
+
+:host ::ng-deep .p-button {
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-button:enabled:hover {
+  background: #f57c00 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+}
+
+:host ::ng-deep .p-button:enabled:active {
+  transform: translateY(0);
+}
+
+:host ::ng-deep .p-button:disabled {
+  background: #ffcc80 !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+
+.mt-2 {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.mt-2 a {
+  color: #ff9800;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.mt-2 a:hover {
+  color: #f57c00;
+  text-decoration: underline;
+}
+
+
+.field:has(.error-message:not(:empty)) input {
+  border-color: #f44336;
+}
+
+
+:host ::ng-deep .p-card {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+

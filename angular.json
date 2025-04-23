@@ -26,9 +26,11 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+           "styles": [
+           "primeicons/primeicons.css",
+           "primeflex/primeflex.css",
+           "src/styles.css"
+          ],
             "scripts": []
           },
           "configurations": {
@@ -92,5 +94,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

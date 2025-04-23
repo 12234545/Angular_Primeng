@@ -1,9 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CardModule } from 'primeng/card';
+
+import { ToastModule } from 'primeng/toast';
+
+import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet ,
+     CardModule ,
+
+     ToastModule,
+
+    ],
+  providers: [MessageService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
