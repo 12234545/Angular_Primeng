@@ -6,7 +6,7 @@ import { Todo } from '../interfaces/todo';
   providedIn: 'root'
 })
 export class TodoService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://localhost:3001';
   constructor(private http: HttpClient) {
 
   }

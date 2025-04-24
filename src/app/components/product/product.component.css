@@ -1,0 +1,134 @@
+.container{
+  height: 80vh;
+  width: 80vw;
+  background-color: rgba(255, 255, 255, 0.863);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px ;
+}
+
+.cont2{
+  display: flex;
+}
+
+#butt{
+  margin: 10px;
+}
+
+.footer-background {
+  background-color: rgba(255, 255, 255, 0.863);
+  box-shadow:  0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  width: 100%;
+  border-radius: 0 10px 0 0;
+}
+
+
+:host ::ng-deep .p-dialog-mask {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+:host ::ng-deep .product-dialog {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+
+:host ::ng-deep .p-dialog {
+  font-family: 'Poppins', sans-serif;
+  border-radius: 12px;
+  background-color:  rgba(255, 255, 255, 0.95);
+}
+
+:host ::ng-deep .p-dialog-mask {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+:host ::ng-deep .p-dialog:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  font-size: 1.7rem;
+  font-weight: bold;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  padding: 1.5rem;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+:host ::ng-deep .p-inputtext:focus {
+  border-color: #15b753;
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+}
+
+:host ::ng-deep .p-inputtext:hover {
+  border-color: #15b753;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-dialog .p-button:enabled:hover {
+
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(80, 80, 80, 0.3);
+}
+
+:host ::ng-deep .p-dialog .p-button:enabled:active {
+  transform: translateY(0);
+}
+
+.p-text-secondary {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+
+
+.flex.items-center label {
+  display: block;
+  font-weight: 500;
+  color: #555;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+
+

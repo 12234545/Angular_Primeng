@@ -36,4 +36,10 @@ export const routes: Routes = [
       return import('./components/todo-list/todo-list.component').then(m => m.TodoListComponent);
     }
   },
+  {
+    path: 'shop',
+    loadComponent: () =>{
+      return import('./components/product/product.component').then(m => m.ProductComponent);
+    }
+  },
 ];
