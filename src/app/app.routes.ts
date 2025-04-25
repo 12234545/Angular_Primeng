@@ -5,11 +5,12 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    canActivate : [authGuard],
+
     loadComponent: () =>{
-      return import('./components/home/home.component').then(m => m.HomeComponent);
+      return import('./components/welcome/welcome.component').then(m => m.WelcomeComponent);
     }
   },
+
   {
     path: 'home',
     canActivate : [authGuard],

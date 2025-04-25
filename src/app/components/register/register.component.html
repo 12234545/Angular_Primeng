@@ -1,7 +1,13 @@
 <div class="container">
 <form [formGroup]="registerForm" (ngSubmit)="submitDetails()" >
   <p-toast position="top-right"></p-toast>
-  <p-card header="Register" [style]="{ width: '360px' , boxShadow: '0 0 10px rgba(0, 0, 0, 0.10)' , fontfamily: 'Poppins' }" >
+
+    <p-card [style]="{ width: '360px' , fontfamily: 'Poppins' , boxShadow: '0 0 10px rgba(0, 0, 0, 0.10)'}">
+      <ng-template pTemplate="header">
+        <div>
+          <span class="pi pi-angle-left" (click)="goBack()"></span> Register
+        </div>
+      </ng-template>
     <div class="field">
       <label for="fullName"> Full Name</label>
       <input type="text" pInputText formControlName="fullName" class="w-full"  name="fullName" placeholder="Type your full Name..."/>
