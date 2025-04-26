@@ -43,4 +43,10 @@ export const routes: Routes = [
       return import('./components/product/product.component').then(m => m.ProductComponent);
     }
   },
+  {
+    path: 'chatbot',
+    loadComponent: () =>{
+      return import('./components/chatbot/chatbot.component').then(m => m.ChatbotComponent);
+    }
+  },
 ];
