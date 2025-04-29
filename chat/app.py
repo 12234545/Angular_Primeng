@@ -56,65 +56,47 @@ advanced_retriever = ContextualCompressionRetriever(
     base_retriever=base_retriever
 )
 
-# Prompts multilingues
-rag_template_fr = """Rôle : Expert en formation, orientation professionnelle et création de formations en ligne multilingue.
-Mission : 
-- Répondre aux questions en français, anglais ou arabe, selon la langue utilisée par l'utilisateur.
-- Fournir des informations sur tous types de formations (universitaires, professionnelles, certifications, MOOCs, etc.).
-- Orienter les jeunes vers des parcours adaptés à leurs besoins et ambitions.
-- Conseiller les personnes souhaitant créer et publier des formations en ligne (plateformes, méthodologie, outils).
+# Prompts multilingues modifiés pour des réponses plus naturelles
+rag_template_fr = """Tu es Formito, un assistant de formation et d'orientation professionnelle. Réponds de manière naturelle et concise, adaptée au contexte de la question.
 
 Historique : {history}
 Connaissances : {context}
 Question : {question}
 
-Consignes :
-- Répondez dans la même langue que l'utilisateur si possible.
-- Répondez uniquement avec les informations disponibles.
-- Structurez votre réponse avec des paragraphes clairs pour faciliter la lecture.
-- Utilisez des titres et sous-titres si nécessaire pour organiser l'information.
-- En cas de hors-sujet : "Je n'ai pas cette information. Voulez-vous une question sur les universités marocaines ?"
-- Ton professionnel, bienveillant, clair et motivant.
+Consignes:
+- Réponds brièvement aux salutations et questions simples (1-2 phrases maximum).
+- Pour les questions complexes, structure ta réponse clairement mais reste concis.
+- Adapte la longueur de ta réponse à la complexité de la question.
+- Ne te présente pas à chaque fois, sauf si on te le demande explicitement.
+- Réponds dans la même langue que l'utilisateur.
 """
 
-rag_template_en = """Role: Expert in training, professional guidance, and online course creation (multilingual).
-Mission:
-- Answer questions in French, English, or Arabic, depending on the user's language.
-- Provide information on all types of training (academic, professional, certifications, MOOCs, etc.).
-- Guide young people towards paths suited to their needs and ambitions.
-- Advise those wishing to create and publish online courses (platforms, methodology, tools).
+rag_template_en = """You are Formito, a training and professional guidance assistant. Respond naturally and concisely, adapting to the context of the question.
 
 History: {history}
 Knowledge: {context}
 Question: {question}
 
-Instructions:
-- Respond in the same language as the user whenever possible.
-- Only answer using available information.
-- Structure your response with clear paragraphs for easier reading.
-- Use headings and subheadings if necessary to organize the information.
-- If the question is out of scope: "I don't have that information. Would you like a question about Moroccan universities?"
-- Tone: professional, caring, clear, and motivating.
+Guidelines:
+- Respond briefly to greetings and simple questions (1-2 sentences maximum).
+- For complex questions, structure your response clearly but remain concise.
+- Adapt the length of your response to the complexity of the question.
+- Don't introduce yourself each time, unless explicitly asked.
+- Respond in the same language as the user.
 """
 
-rag_template_ar = """الدور: خبير في التكوين، التوجيه المهني، وإنشاء الدورات التدريبية عبر الإنترنت (بجميع اللغات).
-المهمة:
-- الإجابة عن الأسئلة بالفرنسية أو الإنجليزية أو العربية حسب لغة المستخدم.
-- تقديم معلومات عن جميع أنواع التكوين (الجامعي، المهني، الشهادات، الدورات عبر الإنترنت، إلخ).
-- توجيه الشباب نحو المسارات المناسبة لاحتياجاتهم وطموحاتهم.
-- تقديم المشورة للأشخاص الراغبين في إنشاء ونشر الدورات التدريبية عبر الإنترنت (المنصات، المنهجية، الأدوات).
+rag_template_ar = """أنت فورميتو، مساعد في التدريب والتوجيه المهني. استجب بشكل طبيعي وموجز، مع التكيف مع سياق السؤال.
 
 السجل: {history}
 المعرفة: {context}
 السؤال: {question}
 
-التعليمات:
-- الرد بنفس لغة المستخدم إن أمكن.
-- الرد فقط بناءً على المعلومات المتاحة.
-- تقسيم الرد بالبنائم للقراءة سهلة.
-- استخدام العناوين والعناوين الفرعية اذا كانت مطلوبة.
-- إذا كان السؤال خارج النطاق: "لا أملك هذه المعلومة. هل ترغب في سؤال عن الجامعات المغربية؟"
-- النبرة: مهنية، ودودة، واضحة، ومشجعة.
+إرشادات:
+- الرد بإيجاز على التحيات والأسئلة البسيطة (جملة أو جملتين كحد أقصى).
+- بالنسبة للأسئلة المعقدة، قم بهيكلة إجابتك بوضوح مع الحفاظ على الإيجاز.
+- تكييف طول إجابتك مع تعقيد السؤال.
+- لا تقدم نفسك في كل مرة، إلا إذا طُلب منك ذلك صراحة.
+- الرد بنفس لغة المستخدم.
 """
 
 # Configuration du modèle de réponse
@@ -139,7 +121,7 @@ def retrieve_context(query):
     docs = advanced_retriever.get_relevant_documents(query)
     return "\n\n".join([f"- {doc.page_content}" for doc in docs])
 
-# Fonction principale de génération de réponse
+# Fonction principale de génération de réponse modifiée
 def generate_response(user_message, response_format="default"):
     conversation_history = memory.buffer
     context = retrieve_context(user_message)
@@ -160,13 +142,33 @@ def generate_response(user_message, response_format="default"):
         language_instruction = "Réponds en français."
         selected_prompt = ChatPromptTemplate.from_template(rag_template_fr)
 
-    # Ajout d'instructions de formatage
-    format_instruction = ""
-    if response_format == "structured":
-        format_instruction = "\nStructure ta réponse avec des titres, sous-titres, et paragraphes clairs."
-    elif response_format == "paragraphs":
-        format_instruction = "\nOrganise ta réponse en paragraphes distincts, chacun traitant d'un aspect spécifique de la question."
-    
+    # Détecter si c'est une question simple (salutation, remerciement, etc.)
+    simple_greetings_fr = ["bonjour", "salut", "bonsoir", "hello", "coucou", "hey", "ça va", "comment ça va", "merci"]
+    simple_greetings_en = ["hello", "hi", "hey", "good morning", "good evening", "thanks", "thank you", "how are you"]
+    simple_greetings_ar = ["مرحبا", "السلام عليكم", "صباح الخير", "مساء الخير", "شكرا"]
+
+    is_simple_question = False
+
+    # Conversion en minuscule pour la comparaison
+    user_message_lower = user_message.lower().strip()
+
+    # Vérifier si c'est une salutation simple
+    if (user_language == "fr" and any(greeting in user_message_lower for greeting in simple_greetings_fr)) or \
+       (user_language == "en" and any(greeting in user_message_lower for greeting in simple_greetings_en)) or \
+       (user_language == "ar" and any(greeting in user_message_lower for greeting in simple_greetings_ar)):
+        if len(user_message_lower.split()) <= 5:  # Si le message contient 5 mots ou moins
+            is_simple_question = True
+
+    # Ajouter une instruction spécifique pour les questions simples
+    if is_simple_question:
+        format_instruction = "\nC'est une salutation simple. Réponds de manière très brève et naturelle, comme dans une conversation normale (1-2 phrases maximum)."
+    else:
+        format_instruction = ""
+        if response_format == "structured":
+            format_instruction = "\nStructure ta réponse avec des titres, sous-titres, et paragraphes clairs."
+        elif response_format == "paragraphs":
+            format_instruction = "\nOrganise ta réponse en paragraphes distincts, chacun traitant d'un aspect spécifique de la question."
+
     modified_question = f"{language_instruction}{format_instruction}\n\n{user_message}"
 
     prompt = selected_prompt.format(
@@ -174,19 +176,34 @@ def generate_response(user_message, response_format="default"):
         context=context,
         question=modified_question
     )
-    response = llm_response([HumanMessage(content=prompt)]).content
+
+    # Sauvegarde de la température originale
+    temp_original = llm_response.temperature
+
+    # Modifier la température en fonction du type de question
+    if is_simple_question:
+        llm_response.temperature = 0  # Pour les questions simples
+    else:
+        llm_response.temperature = 0.2  # Pour les questions complexes
+
+    # Envoyer la requête au modèle
+    response = llm_response.invoke([HumanMessage(content=prompt)]).content
+
+    # Restaurer la température originale
+    llm_response.temperature = temp_original
 
     memory.save_context({"input": user_message}, {"output": response})
 
     return response
+
 # Traitement OCR (image vers texte)
-ocr = PaddleOCR(use_angle_cls=True, lang='fr')  
+ocr = PaddleOCR(use_angle_cls=True, lang='fr')
 results = ocr.ocr("image/img4.png", cls=True)
 
 text_from_image = ""
 if results and results[0] is not None:
     for line in results[0]:
-        text_line = line[1][0]  
+        text_line = line[1][0]
         text_from_image += text_line + "\n"
 else:
     print("Aucun texte détecté dans l'image.")

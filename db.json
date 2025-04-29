@@ -47,25 +47,15 @@
       "fullName": "khaoula El bakkali",
       "email": "khaoulaBK@gmail.com",
       "password": "12345678"
-    }
-  ],
-  "todos": [
-    {
-      "id": "cf78",
-      "task": "Drink wather",
-      "completed": true
     },
     {
-      "id": "7f0e",
-      "task": "Finish My Project",
-      "completed": true
-    },
-    {
-      "id": "d0a1",
-      "task": "KKKKK",
-      "completed": false
+      "id": "48c8",
+      "fullName": "LINA",
+      "email": "LINA222@gmail.com",
+      "password": "1234"
     }
   ],
+  "todos": [],
   "product": [
     {
       "name": "Summary Mathematics",
