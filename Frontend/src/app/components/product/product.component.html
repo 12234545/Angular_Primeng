@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="cont2">
+    <p-button id="butt" [style]="{ background: '#1ADA63', border: 'none' }"><a routerLink="/home" style="text-decoration: none; color: white;"><span class="pi pi-arrow-left" style="font-size: 0.9rem ; margin: 0"></span></a></p-button>
+    <h1>Shop</h1>
+  </div>
+  <p-toast position="top-right"></p-toast>
+  <div class="flex flex-column align-items-center justify-content-center">
+    <p-card class="w-11">
+      <p style="text-align: center;">Here you can sell your Summary, Report, Course and more things you want...</p>
+      <p-table [value]="products" [scrollable]="true" scrollHeight="250px">
+        <ng-template pTemplate="caption">
+          <div class="flex items-center justify-content-between">
+            <span class="text-xl font-bold">Products</span>
+            <p-button id="but" [style]="{ background: '#1ADA63', border: 'none' }" (click)="showDialog()">
+              <span class="pi pi-plus" style="font-size: 0.9rem; margin: 0"></span>
+            </p-button>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th width="25%">Name</th>
+            <th width="10%">Image</th>
+            <th width="35%">Description</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>
+              <img src="{{ product.image }}" [alt]="product.name" class="w-24 h-24 border-round shadow-2" style="width: 70px; height: 70px; object-fit: cover;" />
+            </td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }} DH</td>
+            <td>
+              <p-button id="but" [style]="{ background: '#F51548', border: 'none' }" (click)="deleteProduct($event, product)">
+                <span class="pi pi-trash" style="font-size: 0.9rem; margin: 0"></span>
+              </p-button>
+            </td>
+            <td>
+              <p-button id="but" [style]="{ background: '#ff9800', border: 'none' }" (click)="showEditDialog(product)">
+                <span class="pi pi-pencil" style="font-size: 0.9rem; margin: 0"></span>
+              </p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="footer-background">
+            In total there are {{ products ? products.length : 0 }} products.
+          </div>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>
+
+<p-dialog header="Add Product" [(visible)]="visible" [style]="{ width: '400px' }" [modal]="true" styleClass="product-dialog" [dismissableMask]="true">
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+    <span class="p-text-secondary">Enter your product details</span>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="name" class="font-semibold w-24">Name</label>
+      <div class="flex-auto">
+        <input pInputText id="name" formControlName="name" class="w-full" autocomplete="off" placeholder="Type product name..." />
+        <small *ngIf="name.invalid && (name.dirty || name.touched)" class="block error-message">
+          <div *ngIf="name.errors?.['required']">Name is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="image" class="font-semibold w-24">Image</label>
+      <div class="flex-auto">
+        <input pInputText id="image" formControlName="image" class="w-full" autocomplete="off" placeholder="Enter image URL..." />
+        <small *ngIf="image.invalid && (image.dirty || image.touched)" class="block error-message">
+          <div *ngIf="image.errors?.['required']">Image URL is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="description" class="font-semibold w-24">Description</label>
+      <div class="flex-auto">
+        <input pInputText id="description" formControlName="description" class="w-full" autocomplete="off" placeholder="Type product description..." />
+        <small *ngIf="description.invalid && (description.dirty || description.touched)" class="block error-message">
+          <div *ngIf="description.errors?.['required']">Description is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="price" class="font-semibold w-24">Price</label>
+      <div class="flex-auto">
+        <input pInputText type="number" id="price" formControlName="price" class="w-full" autocomplete="off" placeholder="Enter price..." />
+        <small *ngIf="price.invalid && (price.dirty || price.touched)" class="block error-message">
+          <div *ngIf="price.errors?.['required']">Price is required</div>
+          <div *ngIf="price.errors?.['min']">Price cannot be negative</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-4 mt-4">
+      <p-button label="Cancel" styleClass="w-24" severity="secondary" (click)="visible = false" type="button" />
+      <p-button label="Save" styleClass="w-24" [style]="{ background: '#1ADA63', border: 'none' }" type="submit" [disabled]="productForm.invalid" />
+    </div>
+  </form>
+</p-dialog>
+
+
+<p-dialog header="Edit Product" [(visible)]="editVisible" [style]="{ width: '400px' }" [modal]="true" styleClass="product-dialog" [dismissableMask]="true">
+  <form [formGroup]="editForm" (ngSubmit)="updateProduct()">
+    <span class="p-text-secondary">Update your product details</span>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="editName" class="font-semibold w-24">Name</label>
+      <div class="flex-auto">
+        <input pInputText id="editName" formControlName="name" class="w-full" autocomplete="off" placeholder="Type product name..." />
+        <small *ngIf="editName.invalid && (editName.dirty || editName.touched)" class="block error-message">
+          <div *ngIf="editName.errors?.['required']">Name is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="editImage" class="font-semibold w-24">Image</label>
+      <div class="flex-auto">
+        <input pInputText id="editImage" formControlName="image" class="w-full" autocomplete="off" placeholder="Enter image URL..." />
+        <small *ngIf="editImage.invalid && (editImage.dirty || editImage.touched)" class="block error-message">
+          <div *ngIf="editImage.errors?.['required']">Image URL is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="editDescription" class="font-semibold w-24">Description</label>
+      <div class="flex-auto">
+        <input pInputText id="editDescription" formControlName="description" class="w-full" autocomplete="off" placeholder="Type product description..." />
+        <small *ngIf="editDescription.invalid && (editDescription.dirty || editDescription.touched)" class="block error-message">
+          <div *ngIf="editDescription.errors?.['required']">Description is required</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 mt-3">
+      <label for="editPrice" class="font-semibold w-24">Price</label>
+      <div class="flex-auto">
+        <input pInputText type="number" id="editPrice" formControlName="price" class="w-full" autocomplete="off" placeholder="Enter price..." />
+        <small *ngIf="editPrice.invalid && (editPrice.dirty || editPrice.touched)" class="block error-message">
+          <div *ngIf="editPrice.errors?.['required']">Price is required</div>
+          <div *ngIf="editPrice.errors?.['min']">Price cannot be negative</div>
+        </small>
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-4 mt-4">
+      <p-button label="Cancel" styleClass="w-24" severity="secondary" (click)="editVisible = false" type="button" />
+      <p-button label="Update" styleClass="w-24" [style]="{ background: '#ff9800', border: 'none' }" type="submit" [disabled]="editForm.invalid" />
+    </div>
+  </form>
+</p-dialog>

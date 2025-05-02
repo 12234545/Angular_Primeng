@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="cont2">
+  <p-button id="butt" [style]="{ background: '#F738D4', border: 'none' }" ><a routerLink="/home" style="text-decoration: none; color: white;"><span class="pi pi-arrow-left" style="font-size: 0.9rem ; margin: 0"></span> </a></p-button>
+  <h1>Todo List</h1>
+  </div>
+  <div class="flex flex-column align-items-center justify-content-center">
+   <p-card  class="w-8">
+    <p class="m-0">
+    <p-table [value]="todos" [scrollable]="true" scrollHeight="250px"  >
+      <ng-template #header>
+          <tr>
+              <th width="5%">Completed</th>
+              <th>Task</th>
+              <th width="5%"></th>
+
+          </tr>
+      </ng-template>
+      <ng-template #body let-todo>
+          <tr>
+              <td><p-checkbox [(ngModel)]="todo.completed" [binary]="true" (onChange)="updateTodo($event ,todo)" /></td>
+              <td>{{ todo.task }}</td>
+              <td><p-button
+                id="but"
+                [style]="{ background: '#F51548', border: 'none' }"
+                (click)="deleteTodo($event , todo?.id)"
+                >
+                <span class="pi pi-trash" style="font-size: 0.9rem ; margin: 0"></span>
+              </p-button></td>
+
+          </tr>
+      </ng-template>
+  </p-table>
+  </p>
+   </p-card>
+   <p-card class="w-8 mt-3 ">
+    <div style="display: flex; ">
+    <p-floatlabel variant="on">
+      <input pInputText [(ngModel)]="task" #todoTask="ngModel" required id="on_label"  autocomplete="off" style="width: 600px; "/>
+      <label for="on_label" style="color: #17B6EE;">Todo</label>
+   </p-floatlabel>
+    <p-button id="but" (onClick)="addTodo()" [style]="{ background: '#17B6EE', border: 'none',  }" [disabled]="!!todoTask.invalid" label="+"></p-button>
+    </div>
+   </p-card>
+  </div>
+  </div>
